@@ -1,10 +1,3 @@
-client/eslint.config.js
-client/index.html
-client/package-lock.json
-client/package.json
-client/README.md
-client/vite.config.js
-client/public/vite.svg
 client/src/App.jsx
 client/src/index.css
 client/src/main.jsx
@@ -14,3 +7,4 @@ client/src/pages/Home.jsx
 client/src/pages/Signin.jsx
 client/src/pages/Signup.jsx
 client/src/pages/Verify.jsx
+.gitignore
