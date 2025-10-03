@@ -1,0 +1,8 @@
+body {
+  background: linear-gradient(90deg,rgb(32, 165, 32),grey);
+
+}
+.dash{
+  background: rgba(220, 247, 172, 0.6);
+  border-radius: 50px;
+}
