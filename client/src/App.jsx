@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard';
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
+import Verify from './pages/Verify';
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
           <Route path='/signup' element={<Signup></Signup>}></Route>
           <Route path='/signin' element={<Signin></Signin>}></Route>
+          <Route path='/verify' element={<Verify></Verify>}></Route>
         </Routes>
       </Router>
     </>
