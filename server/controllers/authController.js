@@ -5,7 +5,7 @@ const { generateTokenAndCookie } = require("../utils/generateTokenAndCookies");
 
 
 const signup = async(req,res)=>{
-   const {email,password,name} = req.body
+   const {email,password,name,tel} = req.body
    try {
     if(!email || !password|| !name){
         throw new Error("All fields are required");
@@ -21,6 +21,7 @@ const signup = async(req,res)=>{
         email,
         password:hashedpassword,
         name,
+        tel,
         verificationToken
     })
 
