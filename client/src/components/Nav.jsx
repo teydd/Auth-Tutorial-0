@@ -37,7 +37,7 @@ export default function Nav() {
                 </Link>
               </li>
             </ul>
-            <Link to={"/signin"} className="btn btn-danger">
+            <Link to={"/signin"} className="btn btn-outline-dark fw-bold">
               Signin
             </Link>
           </div>
