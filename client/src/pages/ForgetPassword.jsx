@@ -41,6 +41,7 @@ export default function ForgetPassword() {
          
         />
         <br />
+        {error}
         <button
           type="submit"
           className="btn btn-lg btn-outline-success active w-100"
