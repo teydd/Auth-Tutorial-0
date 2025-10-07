@@ -25,8 +25,24 @@ export const useAuthStore = create((set) => ({
             throw error
         }
     },
-    verify: async () => {
-
+    verify: async (code) => {
+        set({isLoading:true,error:null})
+        try {
+            const response = await axios.post(`${URL}/verify`,{code})
+            set({user:response.data.user,isLoading:false,error:null})
+        } catch (error) {
+            set({error:error.response.data.message || "Error verifying function"})
+            throw error
+        }
+    },
+    checkAuth:async()=>{
+        set({isCheckingAuth:true,error:null})
+        try {
+            const response = await axios.get(`${URL}/check-auth`)
+            set({user:response.data.user,isAuthenticated:true,isCheckingAuth:false})
+        } catch (error) {
+            set({error:null,isCheckingAuth:false,isAuthenticated:false})            
+        }
     },
     signin:async(email,password)=>{
         set({isLoading:true,error:null,isAuthenticated:true})
@@ -42,12 +58,13 @@ export const useAuthStore = create((set) => ({
 
     },
     forget:async(email)=>{
-        set({isLoading:false,error:null})
+        set({isLoading:true,error:null})
         try {
             const response = await axios.post(`${URL}/forgot-password`,{email})
-            set({user:response.data.user,isLoading:true, error:null})
+            set({user:response.data.user,isLoading:false, error:null})
         } catch (error) {
-            
+            set({error:error.response.data.message || "Error forgot function" ,isLoading:false})
+            throw error            
         }
     },
 }))
