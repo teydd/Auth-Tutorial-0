@@ -55,16 +55,34 @@ export const useAuthStore = create((set) => ({
         }
     },
     logout:async()=>{
-
+        set({isLoading:true,error:null})
+        try {
+            await axios.post(`${URL}/logout`)
+            set({user:null,isLoading:false,isAuthenticated:false,error:null})
+        } catch (error) {
+            set({error:"Error Logging out",isLoading:false})
+            throw error            
+        }
     },
     forget:async(email)=>{
         set({isLoading:true,error:null})
         try {
             const response = await axios.post(`${URL}/forgot-password`,{email})
-            set({user:response.data.user,isLoading:false, error:null})
+            set({user:response.data.user,isLoading:false})
         } catch (error) {
-            set({error:error.response.data.message || "Error forgot function" ,isLoading:false})
+            set({error:error.response.data.message || "Error sending reset password link" ,isLoading:false})
             throw error            
         }
     },
+    resetPassword:async(token,password)=>{
+        set({isLoading:true,error:null})
+        try {
+            const response = await axios.post(`${URL}/reset-password/${token}`,{password})
+            set({user:response.data.user,isLoading:false})
+        } catch (error) {
+            set({error:error.response.data.message || "Error resetting password"})
+            throw error
+        }
+
+    }
 }))
