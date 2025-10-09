@@ -1,14 +1,31 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useAuthStore } from '../store/authStore'
+import toast from 'react-hot-toast'
 
 export default function ResetPassword() {
     const [form,setForm] = useState({
         password:"",
         newpassword:""
     })
+    const {resetPassword,isLoading,error}=useAuthStore()
+    const {token} =useParams()
+    const navigate =useNavigate()
 
     const handleSubmit = async(e)=>{
+      const {password} = form
         e.preventDefault()
+        if(form.password !== form.newpassword){
+          toast.error("Passwords do not match")
+          return
+        }
+        try {
+           await resetPassword(token,password)
+        toast.success("Password reset successfully")
+        navigate("/signin")
+        } catch (error) {
+          toast.error("Error resetting password")          
+        }
     }
     const handleChange = (e)=>{
         const {name,value} = e.target
@@ -28,18 +45,19 @@ export default function ResetPassword() {
         <input
           className="form-control"
           type="text"
-          name="email"
+          name="password"
           placeholder="Password"
           autoFocus
           onChange={handleChange}
           value={form.password}
+          required
          
         />
         <br />
         <input
           className="form-control"
           type="text"
-          name="email"
+          name="newpassword"
           placeholder="Confirm Password"
           onChange={handleChange}
           value={form.newpassword}
@@ -50,7 +68,7 @@ export default function ResetPassword() {
           type="submit"
           className="btn btn-lg btn-outline-success active w-100"
         >
-          Submit
+          {isLoading ? "Resetting " : "Set New Password"}
         </button>
       </form>
     </div>
