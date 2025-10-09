@@ -12,6 +12,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import {Toaster} from "react-hot-toast"
 import { useAuthStore } from "./store/authStore";
+import { RedirectingRoute } from "./components/RedirectingRoute";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
@@ -29,11 +30,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard></Dashboard></ProtectedRoute>}></Route>
-          <Route path="/signup" element={<Signup></Signup>}></Route>
-          <Route path="/signin" element={<Signin></Signin>}></Route>
+          <Route path="/signup" element={<RedirectingRoute><Signup></Signup></RedirectingRoute>}></Route>
+          <Route path="/signin" element={<RedirectingRoute><Signin></Signin></RedirectingRoute>}></Route>
           <Route path="/verify" element={<Verify></Verify>}></Route>
-          <Route path="/forgot-password" element={<ForgetPassword></ForgetPassword>}></Route>
-          <Route path="/reset-password" element={<ResetPassword></ResetPassword>}></Route>
+          <Route path="/forgot-password" element={<RedirectingRoute><ForgetPassword></ForgetPassword></RedirectingRoute>}></Route>
+          <Route path="/reset-password/:token" element={<RedirectingRoute><ResetPassword></ResetPassword></RedirectingRoute>}></Route>
         </Routes>
         <Toaster></Toaster>
       </Router>
