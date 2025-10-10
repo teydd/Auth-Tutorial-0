@@ -17,15 +17,19 @@ const UserSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    lastLogin:{
+        type:Date,
+        default:Date.now
+    },
     role:{
         type:String,
         enum:['customer','admin'],
         default:'customer'
     },
     verificationToken:String,
-    verificationTokenExpiresAt:String,
+    verificationTokenExpiresAt:Date,
     resetPasswordToken:String,
-    resetPasswordTokenExpiresAt:String
+    resetPasswordTokenExpiresAt:Date
 },{timestamps:true})
 
 const User = mongoose.model("user",UserSchema)
