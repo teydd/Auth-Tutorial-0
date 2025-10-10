@@ -12,7 +12,16 @@
     "mailtrap": "^4.3.0",
     "mongoose": "^8.18.3"
   },
-  "start":{
-    "start":"node index.js"
-  }
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
