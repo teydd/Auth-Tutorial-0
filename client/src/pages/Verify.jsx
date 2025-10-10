@@ -23,9 +23,9 @@ export default function Verify() {
         await verify(code)
         navigate("/dashboard")
         toast.success("Verified successfully")
-      }
-      
+      }      
   }
+  
   return (
     <>
      <div className="align-items-center justify-content-center d-flex mt-5 ">
