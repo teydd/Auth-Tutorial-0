@@ -19,7 +19,7 @@ function App() {
   const {isCheckingAuth,checkAuth,isAuthenticated,user} = useAuthStore()
   useEffect(()=>{
     checkAuth()
-  },[checkAuth])
+  },[])
 
   console.log("User",user)
   console.log("is Authenticated",isAuthenticated)
