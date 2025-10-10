@@ -18,7 +18,7 @@ app.use(cors({origin:process.env.CLIENT_ORIGIN,credentials:true}))
 
 app.use(helmet())
 app.use(ratelimit({
-    widowMS:10*60*1000,
+    windowMS:10*60*1000,
     max:50
 }))
 
