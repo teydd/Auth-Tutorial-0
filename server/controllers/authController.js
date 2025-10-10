@@ -185,7 +185,7 @@ const checkAuth = async(req,res)=>{
             return res.status(401).json({message:"User not found"})
         }
 
-        await user.save()
+        
         res.status(200).json({
             success:true,
             user:{
