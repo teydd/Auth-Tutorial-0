@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import axios from "axios"
 
-const URL = "http://localhost:2000/auth"
+const SERVER_URL = import.meta.env.VITE_REACT_APP_URL
 axios.defaults.withCredentials = true
 
 export const useAuthStore = create((set) => ({
@@ -14,7 +14,7 @@ export const useAuthStore = create((set) => ({
     signup: async (email, password, name, tel) => {
         set({ isLoading: true, error: null })
         try {
-            const response = await axios.post(`${URL}/signup`, { email, password, name, tel })
+            const response = await axios.post(`${SERVER_URL}/signup`, { email, password, name, tel })
             set({
                 user: response.data.user,
                 isAuthenticated: true,
@@ -28,7 +28,7 @@ export const useAuthStore = create((set) => ({
     verify: async (code) => {
         set({isLoading:true,error:null})
         try {
-            const response = await axios.post(`${URL}/verify`,{code})
+            const response = await axios.post(`${SERVER_URL}/verify`,{code})
             set({user:response.data.user,isLoading:false,error:null})
         } catch (error) {
             set({error:error.response.data.message || "Error verifying function"})
@@ -38,7 +38,7 @@ export const useAuthStore = create((set) => ({
     checkAuth:async()=>{
         set({isCheckingAuth:true,error:null})
         try {
-            const response = await axios.get(`${URL}/check-auth`)
+            const response = await axios.get(`${SERVER_URL}/check-auth`)
             set({user:response.data.user,isAuthenticated:true,isCheckingAuth:false})
         } catch (error) {
             set({error:null,isCheckingAuth:false,isAuthenticated:false})            
@@ -47,7 +47,7 @@ export const useAuthStore = create((set) => ({
     signin:async(email,password)=>{
         set({isLoading:true,error:null,isAuthenticated:true})
         try {
-            const response = await axios.post(`${URL}/signin`,{email,password})
+            const response = await axios.post(`${SERVER_URL}/signin`,{email,password})
             set({user:response.data.user,isLoading:false,error:null})
         } catch (error) {
             set({error:error.response.data.message || "Error signing up",isLoading:false})
@@ -57,7 +57,7 @@ export const useAuthStore = create((set) => ({
     logout:async()=>{
         set({isLoading:true,error:null})
         try {
-            await axios.post(`${URL}/logout`)
+            await axios.post(`${SERVER_URL}/logout`)
             set({user:null,isLoading:false,isAuthenticated:false,error:null})
         } catch (error) {
             set({error:"Error Logging out",isLoading:false})
@@ -67,7 +67,7 @@ export const useAuthStore = create((set) => ({
     forget:async(email)=>{
         set({isLoading:true,error:null})
         try {
-            const response = await axios.post(`${URL}/forgot-password`,{email})
+            const response = await axios.post(`${SERVER_URL}/forgot-password`,{email})
             set({user:response.data.user,isLoading:false})
         } catch (error) {
             set({error:error.response.data.message || "Error sending reset password link" ,isLoading:false})
@@ -77,7 +77,7 @@ export const useAuthStore = create((set) => ({
     resetPassword:async(token,password)=>{
         set({isLoading:true,error:null})
         try {
-            const response = await axios.post(`${URL}/reset-password/${token}`,{password})
+            const response = await axios.post(`${SERVER_URL}/reset-password/${token}`,{password})
             set({user:response.data.user,isLoading:false})
         } catch (error) {
             set({error:error.response.data.message || "Error resetting password"})
