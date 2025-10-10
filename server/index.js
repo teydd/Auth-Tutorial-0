@@ -22,7 +22,7 @@ app.use(ratelimit({
     max:50
 }))
 
-app.use("/auth",auth)
+app.use("/",auth)
 
 mongoose.connect(process.env.Test).then(()=>{
     console.log("DB connected succesfully")
