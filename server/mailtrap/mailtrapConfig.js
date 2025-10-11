@@ -1,5 +1,5 @@
 const { MailtrapClient } = require("mailtrap");
-require ("dotenv").config()
+require("dotenv").config();
 
 const TOKEN = process.env.mailtrap_token;
 
@@ -12,4 +12,4 @@ const sender = {
   name: "Auth Tutorial",
 };
 
-module.exports = {client,sender}
+module.exports = { client, sender };
