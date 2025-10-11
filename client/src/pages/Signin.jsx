@@ -4,26 +4,26 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
 export default function Signin() {
-  const [form,setForm] = useState({
-    email:"",
-    password:""
-  })
-  const navigate = useNavigate()
-  const {signin,isLoading,error} = useAuthStore()
-  const handleSubmit = async (e)=>{
-    const {email,password} = form
-    e.preventDefault()
-    await signin(email,password)
-    navigate("/dashboard")
-  }
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const { signin, isLoading, error } = useAuthStore();
+  const handleSubmit = async (e) => {
+    const { email, password } = form;
+    e.preventDefault();
+    await signin(email, password);
+    navigate("/dashboard");
+  };
 
-  const handleChange = (e)=>{
-    const {name,value} = e.target
-    setForm((prev)=>({
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
       ...prev,
-      [name]:value
-    }))
-  }
+      [name]: value,
+    }));
+  };
   return (
     <div className="align-items-center justify-content-center d-flex mt-5 ">
       <form onSubmit={handleSubmit} className="form p-5 rounded-4 dash">
@@ -50,7 +50,12 @@ export default function Signin() {
           value={form.password}
           onChange={handleChange}
         />
-        <Link to={"/forgot-password"} className="text-dark text-decoration-none">Forgot Password?</Link>
+        <Link
+          to={"/forgot-password"}
+          className="text-dark text-decoration-none"
+        >
+          Forgot Password?
+        </Link>
         {error && <p className="text-danger fw-bold">{error}</p>}
         <button
           type="submit"
