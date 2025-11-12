@@ -23,7 +23,7 @@ const signup = async (req, res) => {
     const verificationToken = Math.floor(
       100000 + Math.random() * 900000
     ).toString();
-    const verificationTokenExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
+    const verificationTokenExpiresAt = new Date(Date.now() + 15 * 60 * 1000);
 
     const user = new User({
       email,
